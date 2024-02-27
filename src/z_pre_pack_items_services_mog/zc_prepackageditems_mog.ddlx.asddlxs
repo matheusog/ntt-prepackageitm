@@ -1,0 +1,85 @@
+@Metadata.layer: #CUSTOMER
+@Search.searchable: true
+@UI: { headerInfo: { typeName: 'Pre Package Items',
+                     typeNamePlural: 'Pre Package Items',
+                     title: { type: #STANDARD, label: 'Pre Package Items', value: 'PackageId' }},
+       presentationVariant: [{ sortOrder: [{ by: 'CreationDate',
+                                             direction: #DESC }] }] }
+annotate view ZC_PrePackagedItems_MOG
+    with 
+{
+    @UI.facet: [{ id:     'Pre_Packages_Items',
+                purpose:  #STANDARD,
+                type:     #IDENTIFICATION_REFERENCE,
+                label:    'Pre Package Item',
+                position: 10 }, 
+                { type: #COLLECTION, 
+                  id: 'mainData', 
+                  position: 20, 
+                  label: 'Dados' },
+                { type: #FIELDGROUP_REFERENCE,
+                parentId: 'mainData', 
+                purpose: #STANDARD,
+                label: 'Requisition Data',
+                targetQualifier: 'reqnData',
+                position: 20 },
+                { type: #FIELDGROUP_REFERENCE, 
+                parentId: 'mainData',
+                purpose: #STANDARD,
+                label: 'Administrative Data',
+                targetQualifier: 'adminData',
+                position: 30 }]
+    PackageUuid;
+    @UI: { lineItem:       [{ position: 10,label: 'Package ID', importance: #HIGH }],
+           identification: [{ position: 10, label: 'Package ID' }] }
+    @Search.defaultSearchElement: true 
+    PackageId;
+    @UI: { lineItem:       [{ position: 20,label: 'Plant', importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'reqnData', position: 10, label: 'Plant', importance: #HIGH }] }
+    @Consumption.valueHelpDefinition: [{ entity: { name: 'I_PlantStdVH', element: 'Plant' }}]
+    @Search.defaultSearchElement: true
+    Plant;                      
+    @UI: { lineItem:       [{ position: 60,label: 'PurchaseRequisitionItemText', importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'reqnData', position: 50, label: 'PurchaseRequisitionItemText', importance: #HIGH }] }
+    @Search.defaultSearchElement: true
+    PurchaseRequisitionItemText;
+    @UI: { lineItem:       [{ position: 70,label: 'AccountAssignmentCategory', importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'reqnData', position: 60, label: 'AccountAssignmentCategory', importance: #HIGH }] }
+    AccountAssignmentCategory;
+    @UI: { lineItem:       [{ position: 80,label: 'RequestedQuantity', importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'reqnData', position: 70, label: 'RequestedQuantity', importance: #HIGH }] }
+    RequestedQuantity;  
+//    @UI: { lineItem:       [{ position: 90,label: 'BaseUnit', importance: #HIGH }],
+//           fieldGroup: [{ qualifier: 'reqnData', position: 80, label: 'BaseUnit', importance: #HIGH }] }
+//    BaseUnit;          
+    @UI: { lineItem:       [{ position: 100,label: 'PurchaseRequisitionPrice', importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'reqnData', position: 90, label: 'PurchaseRequisitionPrice', importance: #HIGH }] }
+    PurchaseRequisitionPrice;   
+//    @UI: { lineItem:       [{ position: 110,label: 'PurReqnItemCurrency', importance: #HIGH }],
+//           fieldGroup: [{ qualifier: 'reqnData', position: 100, label: 'PurReqnItemCurrency', importance: #HIGH }] }
+//    PurReqnItemCurrency;   
+    @UI: { lineItem:       [{ position: 30,label: 'MaterialGroup', importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'reqnData', position: 20, label: 'MaterialGroup', importance: #HIGH }] }
+    @Search.defaultSearchElement: true
+    MaterialGroup;        
+    @UI: { lineItem:       [{ position: 50,label: 'PurchasingGroup', importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'reqnData', position: 40, label: 'PurchasingGroup', importance: #HIGH }] }
+    @Search.defaultSearchElement: true
+    PurchasingGroup;            
+    @UI: { lineItem:       [{ position: 40,label: 'PurchasingOrganization', importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'reqnData', position: 30, label: 'PurchasingOrganization', importance: #HIGH }] }
+//    @Consumption.valueHelpDefinition: [{ entity: { name: 'C_PlantPurchasingOrgVH', element: 'PurchasingOrganization' }}]
+    @Search.defaultSearchElement: true
+    PurchasingOrganization; 
+    @UI: { lineItem:[{ position: 120, label: 'Creation date', importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'adminData', position: 10, label: 'Creation date', importance: #HIGH }] }
+    CreationDate;
+    @UI: { lineItem:[{ position: 130, label: 'Creation date', importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'adminData', position: 20, label: 'Creation time', importance: #HIGH }] }
+    CreationTime; 
+    @UI: { lineItem:[{ position: 140, label: 'Creation date', importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'adminData', position: 30, label: 'Created by', importance: #HIGH }] }    
+    @Search.defaultSearchElement: true
+    CreationUser;
+    
+}

@@ -1,0 +1,37 @@
+managed implementation in class zbp_i_prepackageditems_mog unique;
+strict ( 2 );
+
+define behavior for ZI_PrePackagedItems_MOG alias Pre_Package
+persistent table zprepackitem_mog
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  field ( numbering : managed, readonly ) PackageUuid;
+  field ( readonly ) CreationDate, CreationTime, CreationUser, PackageId;
+  field ( mandatory ) AccountAssignmentCategory, BaseUnit, MaterialGroup, Plant,
+                      PurReqnItemCurrency, PurchaseRequisitionItemText, PurchaseRequisitionPrice,
+                      PurchasingGroup, PurchasingOrganization, RequestedQuantity;
+  determination calculate_package_id on modify { create; }
+  create;
+  update;
+  delete;
+
+  mapping for zprepackitem_mog {
+    PackageUuid = package_uuid;
+    PackageId = package_id;
+    Plant   = plant;
+    PurchaseRequisitionItemText = purch_req_it_text;
+    AccountAssignmentCategory = acc_assignment_cat;
+    RequestedQuantity = requested_qty     ;
+    BaseUnit          = base_unit         ;
+    PurchaseRequisitionPrice = purch_req_price   ;
+    PurReqnItemCurrency      = pur_req_item_curr ;
+    MaterialGroup            = material_group    ;
+    PurchasingGroup          = purch_group       ;
+    PurchasingOrganization   = purch_org         ;
+    CreationDate = create_date       ;
+    CreationTime = create_time       ;
+    CreationUser = create_user       ;
+  }
+}

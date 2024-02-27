@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition for pre package items'
+define service ZSD_PREPACKAGEDITEMS_MOG {
+  expose ZC_PrePackagedItems_MOG as Pre_Package_Items;
+}
